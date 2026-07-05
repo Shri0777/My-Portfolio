@@ -336,8 +336,15 @@
           </div>
 
           <!-- Contact Form -->
-          <form class="contact-form fade-in" id="contact-form" aria-label="Contact form" novalidate>
-            <!-- Honeypot -->
+          <form
+    	    class="contact-form fade-in"
+            id="contact-form"
+            method="POST"
+            action="https://formspree.io/f/mkolyozr"
+            aria-label="Contact form"
+            novalidate
+          >            
+	    <!-- Honeypot -->
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
             <div class="form-row">
