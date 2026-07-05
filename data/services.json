@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Backend Development",
+    "description": "Robust, scalable server-side applications built with modern frameworks and best practices. From API design to database architecture, I build backends that perform reliably under real-world conditions.",
+    "icon": "server",
+    "deliverables": [
+      "RESTful API development",
+      "Database design and optimization",
+      "Authentication and authorization",
+      "Server deployment and configuration",
+      "Performance monitoring and logging"
+    ]
+  },
+  {
+    "title": "Full Stack Applications",
+    "description": "End-to-end web applications with clean frontends and powerful backends. I handle the complete development lifecycle from planning and architecture to deployment and maintenance.",
+    "icon": "layers",
+    "deliverables": [
+      "Complete web application development",
+      "Responsive UI implementation",
+      "Backend API integration",
+      "User authentication flows",
+      "Deployment and hosting setup"
+    ]
+  },
+  {
+    "title": "Business Automation",
+    "description": "Intelligent automation systems that eliminate repetitive tasks, reduce errors, and free your team to focus on high-value work. Built with reliability and maintainability in mind.",
+    "icon": "zap",
+    "deliverables": [
+      "Workflow automation design",
+      "n8n workflow development",
+      "Data pipeline creation",
+      "Email and notification automation",
+      "Monitoring and error handling"
+    ]
+  },
+  {
+    "title": "Admin Dashboards",
+    "description": "Custom admin panels and dashboards that give you complete visibility and control over your operations. Built with role-based access and real-time data visualization.",
+    "icon": "layout",
+    "deliverables": [
+      "Custom dashboard development",
+      "Role-based access control",
+      "Data visualization and charts",
+      "Export and reporting features",
+      "Real-time data updates"
+    ]
+  },
+  {
+    "title": "AI Integration",
+    "description": "Practical AI solutions integrated into your existing systems. From intelligent chatbots to automated content generation and data analysis — AI that adds real value to your business.",
+    "icon": "brain",
+    "deliverables": [
+      "AI API integration",
+      "Chatbot development",
+      "Content generation systems",
+      "Data analysis automation",
+      "Custom AI agent development"
+    ]
+  }
+]

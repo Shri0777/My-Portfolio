@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shri Menakshi Sundaram V — Backend Developer &amp; Software Engineer</title>
+  <meta name="description" content="Personal portfolio of Shri Menakshi Sundaram V — a backend developer, AI builder, and freelance software engineer specializing in scalable applications, intelligent automations, and modern web development." />
+  <meta name="author" content="Shri Menakshi Sundaram V" />
+  <meta name="keywords" content="backend developer, software engineer, freelance developer, Python, FastAPI, API development, web development, Coimbatore" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shri Menakshi Sundaram V — Backend Developer & Software Engineer" />
+  <meta property="og:description" content="I build scalable software, intelligent automations, and modern web applications." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>S</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;550;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <header class="navbar" role="banner">
+    <div class="container container--wide navbar__inner">
+      <a href="#home" class="navbar__logo" aria-label="Home">Shri Menakshi Sundaram</a>
+
+      <nav class="navbar__links" aria-label="Primary navigation">
+        <a href="#home" class="navbar__link active">Home</a>
+        <a href="#about" class="navbar__link">About</a>
+        <a href="#projects" class="navbar__link">Projects</a>
+        <a href="#case-studies" class="navbar__link">Case Studies</a>
+        <a href="#articles" class="navbar__link">Articles</a>
+        <a href="#services" class="navbar__link">Services</a>
+        <a href="#contact" class="navbar__link">Contact</a>
+      </nav>
+
+      <button class="navbar__hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav-overlay" aria-hidden="true"></div>
+
+  <!-- Mobile Nav Drawer -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+    <a href="#home" class="mobile-nav__link active">Home</a>
+    <a href="#about" class="mobile-nav__link">About</a>
+    <a href="#projects" class="mobile-nav__link">Projects</a>
+    <a href="#case-studies" class="mobile-nav__link">Case Studies</a>
+    <a href="#articles" class="mobile-nav__link">Articles</a>
+    <a href="#services" class="mobile-nav__link">Services</a>
+    <a href="#contact" class="mobile-nav__link">Contact</a>
+  </nav>
+
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section id="home" class="hero" aria-label="Introduction">
+      <div class="container container--wide">
+        <div class="hero__inner">
+          <div class="hero__content">
+            <p class="hero__greeting fade-in">Hello, I'm</p>
+            <h1 class="hero__name fade-in">Shri Menakshi<br/>Sundaram V.</h1>
+            <div class="hero__roles fade-in">
+              <span class="hero__role">Backend Developer</span>
+              <span class="hero__role">Web Developer</span>
+              <span class="hero__role">Freelancer</span>
+            </div>
+            <p class="hero__description fade-in">
+              I build scalable software, intelligent automations, and modern web applications.
+            </p>
+            <div class="hero__actions fade-in">
+              <a href="#projects" class="btn btn--primary">View Projects</a>
+              <a href="#contact" class="btn btn--secondary">Contact Me</a>
+            </div>
+          </div>
+
+          <div class="hero__illustration fade-in" aria-hidden="true">
+            <!-- Minimal geometric illustration -->
+            <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <!-- Background grid dots -->
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <circle cx="20" cy="20" r="1" fill="#E5E7EB" />
+                </pattern>
+              </defs>
+              <rect width="480" height="480" fill="url(#grid)" rx="24" />
+
+              <!-- Terminal window -->
+              <rect x="60" y="80" width="360" height="240" rx="12" fill="#FAFAFA" stroke="#E5E7EB" stroke-width="1.5"/>
+              <!-- Title bar -->
+              <rect x="60" y="80" width="360" height="36" rx="12" fill="#F7F7F5"/>
+              <rect x="60" y="104" width="360" height="12" fill="#F7F7F5"/>
+              <circle cx="84" cy="98" r="5" fill="#E5E7EB"/>
+              <circle cx="100" cy="98" r="5" fill="#E5E7EB"/>
+              <circle cx="116" cy="98" r="5" fill="#E5E7EB"/>
+
+              <!-- Code lines -->
+              <rect x="88" y="132" width="120" height="8" rx="4" fill="#E5E7EB"/>
+              <rect x="88" y="152" width="200" height="8" rx="4" fill="#2563EB" opacity="0.2"/>
+              <rect x="88" y="172" width="160" height="8" rx="4" fill="#E5E7EB"/>
+              <rect x="108" y="192" width="180" height="8" rx="4" fill="#2563EB" opacity="0.15"/>
+              <rect x="108" y="212" width="140" height="8" rx="4" fill="#E5E7EB"/>
+              <rect x="88" y="232" width="100" height="8" rx="4" fill="#E5E7EB"/>
+              <rect x="88" y="252" width="220" height="8" rx="4" fill="#2563EB" opacity="0.1"/>
+              <rect x="88" y="272" width="80" height="8" rx="4" fill="#E5E7EB"/>
+
+              <!-- Floating elements -->
+              <!-- API badge -->
+              <rect x="300" y="340" width="120" height="36" rx="18" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+              <rect x="316" y="354" width="32" height="8" rx="4" fill="#2563EB" opacity="0.5"/>
+              <rect x="356" y="354" width="48" height="8" rx="4" fill="#E5E7EB"/>
+
+              <!-- Connection nodes -->
+              <circle cx="140" cy="370" r="20" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+              <rect x="132" y="364" width="16" height="12" rx="2" fill="#2563EB" opacity="0.3"/>
+
+              <circle cx="240" cy="400" r="16" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+              <rect x="233" y="395" width="14" height="10" rx="2" fill="#E5E7EB"/>
+
+              <!-- Connection lines -->
+              <line x1="160" y1="370" x2="224" y2="400" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <line x1="256" y1="400" x2="300" y2="358" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+              <!-- Accent dot -->
+              <circle cx="380" y1="120" cy="120" r="6" fill="#2563EB" opacity="0.4"/>
+
+              <!-- Small bracket decoration -->
+              <text x="340" y="284" font-family="monospace" font-size="20" fill="#2563EB" opacity="0.25">{ }</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== About ===== -->
+    <section id="about" class="bg-secondary" aria-label="About me">
+      <div class="container">
+        <span class="section-label fade-in">About</span>
+        <h2 class="section-title fade-in">A bit about me.</h2>
+
+        <div class="about__content">
+          <p class="about__text fade-in">
+            I'm an undergraduate engineering student at KGISL Institute of Technology with a passion for building software that solves real-world problems. Alongside my academic journey, I work as a freelance web developer, helping businesses establish their online presence and streamline their operations through modern, reliable web applications.
+          </p>
+          <p class="about__text fade-in">
+            My primary focus is backend development, system design, and creating scalable solutions that are practical, efficient, and easy to maintain. I enjoy turning ideas into complete products by carefully planning the architecture, designing clean APIs, and building applications that prioritize performance, security, and user experience.
+          </p>
+          <p class="about__text fade-in">
+            Freelancing has given me the opportunity to work on real client projects, understand business requirements, communicate effectively with stakeholders, and deliver software that creates measurable value. Every project is an opportunity to learn, refine my skills, and build solutions that make a meaningful impact.
+          </p>
+          <p class="about__text fade-in">
+            I believe that great software is not just about writing code — it's about understanding the problem, designing thoughtful solutions, and paying attention to the details that make a product dependable and enjoyable to use.
+          </p>
+          <p class="about__text fade-in">
+            I'm continuously expanding my knowledge in backend engineering, artificial intelligence, automation, cloud technologies, and modern software architecture. My goal is to build high-quality digital products, collaborate with ambitious businesses, and grow into a software engineer who creates technology that people genuinely rely on.
+          </p>
+          <p class="about__text fade-in">
+            Outside of development, I enjoy exploring new technologies, documenting what I learn, and challenging myself with projects that push my technical and creative abilities forward.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Tech Stack ===== -->
+    <section class="tech-stack" aria-label="Technologies">
+      <div class="container">
+        <span class="section-label fade-in">Tech Stack</span>
+        <h2 class="section-title fade-in">Technologies I work with.</h2>
+
+        <div class="tech-grid fade-in">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">SQLite</span>
+          <span class="tech-badge">Docker</span>
+          <span class="tech-badge">Git</span>
+          <span class="tech-badge">GitHub</span>
+          <span class="tech-badge">Firebase</span>
+          <span class="tech-badge">Supabase</span>
+          <span class="tech-badge">REST APIs</span>
+          <span class="tech-badge">AI APIs</span>
+          <span class="tech-badge">n8n</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Featured Projects ===== -->
+    <section id="projects" class="bg-secondary" aria-label="Featured projects">
+      <div class="container">
+        <span class="section-label fade-in">Projects</span>
+        <h2 class="section-title fade-in">Featured work.</h2>
+        <p class="section-subtitle fade-in">A selection of projects I've built — from backend systems and APIs to full-stack applications.</p>
+
+        <div class="projects-grid" id="projects-grid">
+          <!-- Rendered by renderer.js -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Case Studies ===== -->
+    <section id="case-studies" aria-label="Case studies">
+      <div class="container">
+        <span class="section-label fade-in">Case Studies</span>
+        <h2 class="section-title fade-in">Deep dives into my work.</h2>
+        <p class="section-subtitle fade-in">Detailed explorations of the problems I've solved, the decisions I've made, and the lessons I've learned.</p>
+
+        <div class="case-studies-grid" id="case-studies-grid">
+          <!-- Rendered by renderer.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study Modal -->
+    <div class="case-study-modal" id="case-study-modal" role="dialog" aria-modal="true" aria-label="Case study details">
+      <div class="case-study-modal__overlay"></div>
+      <div class="case-study-modal__content">
+        <button class="case-study-modal__close" aria-label="Close case study">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <span class="case-study-modal__category"></span>
+        <h2 class="case-study-modal__title"></h2>
+        <div class="case-study-modal__body">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===== Articles ===== -->
+    <section id="articles" class="bg-secondary" aria-label="Articles">
+      <div class="container">
+        <span class="section-label fade-in">Articles</span>
+        <h2 class="section-title fade-in">Writing &amp; thinking.</h2>
+        <p class="section-subtitle fade-in">Technical articles, tutorials, and reflections on software development, system design, and the freelancing journey.</p>
+
+        <div class="articles-grid" id="articles-grid">
+          <!-- Rendered by renderer.js -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Services ===== -->
+    <section id="services" aria-label="Services">
+      <div class="container">
+        <span class="section-label fade-in">Services</span>
+        <h2 class="section-title fade-in">How I can help.</h2>
+        <p class="section-subtitle fade-in">I offer focused development services for businesses looking to build reliable, modern software.</p>
+
+        <div class="services-grid" id="services-grid">
+          <!-- Rendered by renderer.js -->
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials">
+          <span class="section-label fade-in">Testimonials</span>
+          <h2 class="section-title fade-in">What clients say.</h2>
+
+          <div class="testimonials-grid" id="testimonials-grid">
+            <!-- Rendered by renderer.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="bg-secondary" aria-label="Contact">
+      <div class="container">
+        <span class="section-label fade-in">Contact</span>
+        <h2 class="section-title fade-in">Let's build something meaningful.</h2>
+        <p class="section-subtitle fade-in">Have a project in mind or want to collaborate? I'd love to hear from you.</p>
+
+        <div class="contact__inner">
+          <!-- Contact Info -->
+          <div class="fade-in">
+            <div class="contact__info-item">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <p class="contact__info-label">Email</p>
+                <p class="contact__info-value"><a href="mailto:smmeenakshisundarm@gmail.com">smmeenakshisundarm@gmail.com</a></p>
+              </div>
+            </div>
+
+            <div class="contact__info-item">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              </div>
+              <div>
+                <p class="contact__info-label">GitHub</p>
+                <p class="contact__info-value"><a href="https://github.com/Shri0777" target="_blank" rel="noopener noreferrer">github.com/Shri0777</a></p>
+              </div>
+            </div>
+
+            <div class="contact__info-item">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <div>
+                <p class="contact__info-label">LinkedIn</p>
+                <p class="contact__info-value"><a href="https://www.linkedin.com/in/shri-menakshi-sundaram-v-747935314" target="_blank" rel="noopener noreferrer">Shri Menakshi Sundaram V</a></p>
+              </div>
+            </div>
+
+            <div class="contact__info-item">
+              <div class="contact__info-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <p class="contact__info-label">Location</p>
+                <p class="contact__info-value">Coimbatore, India</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <form class="contact-form fade-in" id="contact-form" aria-label="Contact form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="Your name" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" name="subject" placeholder="What's this about?" />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" placeholder="Tell me about your project or idea..." required rows="5"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary">Send Message</button>
+
+            <div class="form-success" role="alert">
+              Thank you! Your message has been sent successfully. I'll get back to you soon.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container container--wide footer__inner">
+      <div class="footer__left">
+        <p class="footer__copyright">&copy; 2026 Shri Menakshi Sundaram V. All rights reserved.</p>
+        <p class="footer__tagline">Designed and developed with attention to detail.</p>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="#home" class="footer__link">Home</a>
+        <a href="#about" class="footer__link">About</a>
+        <a href="#projects" class="footer__link">Projects</a>
+        <a href="#articles" class="footer__link">Articles</a>
+        <a href="#contact" class="footer__link">Contact</a>
+      </nav>
+
+      <div class="footer__socials">
+        <a href="https://github.com/Shri0777" class="footer__social" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/shri-menakshi-sundaram-v-747935314" class="footer__social" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:smmeenakshisundarm@gmail.com" class="footer__social" aria-label="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="js/renderer.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
