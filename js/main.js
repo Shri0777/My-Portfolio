@@ -151,40 +151,173 @@ function initFadeAnimations() {
 /* ---- Contact form ---- */
 function initContactForm() {
   const form = document.getElementById('contact-form');
-  const successMsg = document.querySelector('.form-success');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = submitBtn?.querySelector('.btn-text');
+  const successCard = document.getElementById('form-success');
+  const errorCard = document.getElementById('form-error');
 
-  if (!form) return;
+  if (!form || !submitBtn) return;
 
-  form.addEventListener('submit', (e) => {
+  const nameInput = form.querySelector('#contact-name');
+  const emailInput = form.querySelector('#contact-email');
+  const subjectInput = form.querySelector('#contact-subject');
+  const messageInput = form.querySelector('#contact-message');
+  const counter = form.querySelector('#message-counter');
+  
+  const inputs = [nameInput, emailInput, subjectInput, messageInput].filter(Boolean);
+
+  // Character counter for message
+  if (messageInput && counter) {
+    messageInput.addEventListener('input', () => {
+      const len = messageInput.value.length;
+      counter.textContent = `${len} / 1000`;
+    });
+  }
+
+  // Real-time validation
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      validateInput(input);
+      checkFormValidity();
+    });
+    input.addEventListener('blur', () => {
+      validateInput(input);
+      checkFormValidity();
+    });
+  });
+
+  function showError(input, msg) {
+    input.classList.add('invalid');
+    const errorEl = document.getElementById(`${input.id.replace('contact-', '')}-error`);
+    if (errorEl) errorEl.textContent = msg;
+  }
+
+  function clearError(input) {
+    input.classList.remove('invalid');
+    const errorEl = document.getElementById(`${input.id.replace('contact-', '')}-error`);
+    if (errorEl) errorEl.textContent = '';
+  }
+
+  function validateInput(input) {
+    const val = input.value.trim();
+    if (!val && input.required) {
+      showError(input, 'This field is required');
+      return false;
+    }
+    
+    if (input.type === 'email' && val) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(val)) {
+        showError(input, 'Please enter a valid email address');
+        return false;
+      }
+    }
+    
+    if (input.tagName.toLowerCase() === 'textarea' && val) {
+      if (val.length < 10) {
+        showError(input, 'Message must be at least 10 characters long');
+        return false;
+      }
+      if (val.length > 1000) {
+        showError(input, 'Message cannot exceed 1000 characters');
+        return false;
+      }
+    }
+
+    clearError(input);
+    return true;
+  }
+
+  function checkFormValidity() {
+    const isValid = inputs.every(input => {
+      const val = input.value.trim();
+      if (!val && input.required) return false;
+      if (input.type === 'email' && val) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      }
+      if (input.tagName.toLowerCase() === 'textarea' && val) {
+        return val.length >= 10 && val.length <= 1000;
+      }
+      return true;
+    });
+    
+    submitBtn.disabled = !isValid;
+  }
+
+  // Initial check
+  checkFormValidity();
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Basic validation
-    const name = form.querySelector('#contact-name');
-    const email = form.querySelector('#contact-email');
-    const message = form.querySelector('#contact-message');
-
-    if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
-      return;
+    // Check honeypot
+    const honeypot = form.querySelector('input[name="_gotcha"]');
+    if (honeypot && honeypot.value) {
+      return; // Silently fail for bots
     }
 
-    // Simple email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.value)) {
-      return;
+    // Final validation check
+    let isFormValid = true;
+    inputs.forEach(input => {
+      if (!validateInput(input)) {
+        isFormValid = false;
+      }
+    });
+
+    if (!isFormValid) return;
+
+    // Loading state
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    if (btnText) btnText.textContent = 'Sending...';
+    successCard.hidden = true;
+    errorCard.hidden = true;
+
+    // Disable inputs
+    const allInputs = form.querySelectorAll('input, textarea');
+    allInputs.forEach(el => el.disabled = true);
+
+    const formData = new FormData(form);
+    
+    // Load Formspree endpoint from config
+    const endpoint = window.APP_CONFIG?.formspreeEndpoint || "https://formspree.io/f/YOUR_FORM_ID";
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // Success
+        successCard.hidden = false;
+        form.reset();
+        if (counter) counter.textContent = '0 / 1000';
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          successCard.hidden = true;
+        }, 5000);
+      } else {
+        // Error
+        errorCard.hidden = false;
+      }
+    } catch (err) {
+      // Error
+      errorCard.hidden = false;
+    } finally {
+      // Reset loading state
+      submitBtn.classList.remove('loading');
+      if (btnText) btnText.textContent = 'Send Message';
+      
+      // Re-enable inputs
+      allInputs.forEach(el => el.disabled = false);
+      
+      // Re-check validity to update button state
+      checkFormValidity();
     }
-
-    // Show success (replace with actual form submission)
-    // For now: mailto fallback
-    const subject = form.querySelector('#contact-subject')?.value || 'Portfolio Contact';
-    const body = `Name: ${name.value}%0D%0AEmail: ${email.value}%0D%0A%0D%0A${message.value}`;
-    window.location.href = `mailto:smmeenakshisundarm@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-
-    // Show success message
-    if (successMsg) {
-      successMsg.classList.add('visible');
-      setTimeout(() => successMsg.classList.remove('visible'), 5000);
-    }
-
-    form.reset();
   });
 }

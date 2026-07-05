@@ -336,32 +336,67 @@
           </div>
 
           <!-- Contact Form -->
-          <form class="contact-form fade-in" id="contact-form" aria-label="Contact form">
+          <form class="contact-form fade-in" id="contact-form" aria-label="Contact form" novalidate>
+            <!-- Honeypot -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
             <div class="form-row">
               <div class="form-group">
-                <label for="contact-name">Name</label>
-                <input type="text" id="contact-name" name="name" placeholder="Your name" required autocomplete="name" />
+                <label for="contact-name">Name <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="contact-name" name="name" placeholder="John Smith" required autocomplete="name" aria-describedby="name-error" />
+                <span class="form-error-msg" id="name-error" aria-live="polite"></span>
               </div>
               <div class="form-group">
-                <label for="contact-email">Email</label>
-                <input type="email" id="contact-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+                <label for="contact-email">Email <span class="required" aria-hidden="true">*</span></label>
+                <input type="email" id="contact-email" name="email" placeholder="john@example.com" required autocomplete="email" aria-describedby="email-error" />
+                <span class="form-error-msg" id="email-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-company">Company / Organization <span class="optional">(Optional)</span></label>
+                <input type="text" id="contact-company" name="company" placeholder="Your Company" autocomplete="organization" />
+              </div>
+              <div class="form-group">
+                <label for="contact-subject">Subject <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="contact-subject" name="subject" placeholder="Website Development Enquiry" required aria-describedby="subject-error" />
+                <span class="form-error-msg" id="subject-error" aria-live="polite"></span>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="contact-subject">Subject</label>
-              <input type="text" id="contact-subject" name="subject" placeholder="What's this about?" />
+              <label for="contact-message">Message <span class="required" aria-hidden="true">*</span></label>
+              <textarea id="contact-message" name="message" placeholder="Tell me about your project..." required rows="5" aria-describedby="message-error" minlength="10" maxlength="1000"></textarea>
+              <div class="form-textarea-footer">
+                <span class="form-error-msg" id="message-error" aria-live="polite"></span>
+                <span class="char-counter" id="message-counter">0 / 1000</span>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="contact-message">Message</label>
-              <textarea id="contact-message" name="message" placeholder="Tell me about your project or idea..." required rows="5"></textarea>
+            <button type="submit" class="btn btn--primary btn--submit" id="submit-btn" disabled>
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loader" aria-hidden="true"></span>
+            </button>
+
+            <div class="form-status-card form-success" id="form-success" role="alert" aria-live="assertive" hidden>
+              <div class="form-status-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="form-status-content">
+                <h3>Thank you!</h3>
+                <p>Your message has been sent successfully. I'll get back to you as soon as possible.</p>
+              </div>
             </div>
 
-            <button type="submit" class="btn btn--primary">Send Message</button>
-
-            <div class="form-success" role="alert">
-              Thank you! Your message has been sent successfully. I'll get back to you soon.
+            <div class="form-status-card form-error-card" id="form-error" role="alert" aria-live="assertive" hidden>
+              <div class="form-status-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+              <div class="form-status-content">
+                <h3>Something went wrong</h3>
+                <p>Please try again in a few minutes.</p>
+              </div>
             </div>
           </form>
         </div>
@@ -403,6 +438,7 @@
 
 
   <!-- Scripts -->
+  <script src="js/config.js"></script>
   <script src="js/renderer.js"></script>
   <script src="js/main.js"></script>
 </body>
