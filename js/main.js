@@ -303,10 +303,21 @@ function initContactForm() {
         }, 5000);
       } else {
         // Error
+        const data = await response.json().catch(() => null);
+        let errorMsg = 'Please try again in a few minutes.';
+        if (data && data.errors && data.errors.length > 0) {
+          errorMsg = data.errors.map(e => e.message).join(', ');
+        } else if (data && data.error) {
+          errorMsg = data.error;
+        }
+        const errorDesc = errorCard.querySelector('p');
+        if (errorDesc) errorDesc.textContent = errorMsg;
         errorCard.hidden = false;
       }
     } catch (err) {
       // Error
+      const errorDesc = errorCard.querySelector('p');
+      if (errorDesc) errorDesc.textContent = 'Network error. Please check your connection or CORS settings.';
       errorCard.hidden = false;
     } finally {
       // Reset loading state
