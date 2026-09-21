@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "universal-log-framework",
+    "title": "Universal Log Pre-processing Framework",
+    "category": "Security logging / Cloud and DevOps systems",
+    "summary": "A system architecture for making disparate log data more useful before downstream storage, analytics, or SIEM integration.",
+    "problem": "Different products emit logs in different structures. Before teams can analyze or route those events consistently, the raw formats need a reliable and traceable way to be parsed and normalized.",
+    "constraints": "The system needs to preserve raw records, avoid locking the design to one vendor, support parsers that can be extended over time, and remain clear about the distinction between a problem statement's scale target and a demonstrated implementation.",
+    "architecture": "Log sources enter ingestion, move through a parser layer and normalization stage, are mapped to a common event schema, then remain available for storage, APIs, analytics, dashboards, or security tooling.",
+    "implementation": "The engineering direction uses separable stages instead of a single opaque transformation: raw-data preservation for traceability, plug-in parsers for different input formats, normalized records for downstream consistency, and containerization as a path to repeatable deployment.",
+    "decisions": "Common schema boundaries, raw-event retention, parser extensibility, and explicit observability points are deliberate choices. They make the pipeline easier to reason about and adapt as log sources change.",
+    "challenges": "The central challenge is balancing a common representation with the source-specific context that must not be lost. Another is designing a system story that is useful to security and operations teams without making unsupported production-scale claims.",
+    "result": "The result is a clear prototype architecture and engineering direction for a vendor-agnostic log pre-processing system, ready to be demonstrated through its data flow, extension points, and operational rationale.",
+    "lessons": "Infrastructure-oriented software needs more than transformation logic. Traceability, boundaries, deployment assumptions, and how the system will be observed shape whether the design is useful in practice.",
+    "flow": [["Source", "Application, system, and security logs"], ["Ingestion", "Accept and route raw events"], ["Parser", "Interpret source-specific formats"], ["Normalizer", "Map fields into a common event schema"], ["Storage", "Retain raw and normalized records"], ["API", "Expose a consistent data boundary"], ["Consumers", "Dashboard, analytics, or SIEM integration"]]
+  },
+  {
+    "id": "student-tracker",
+    "title": "Student Management System",
+    "category": "Java / Object-oriented programming",
+    "summary": "A focused Java system that turns programming fundamentals into real application behavior.",
+    "problem": "Student records need dependable create, read, update, delete, search, sorting, and reporting operations rather than disconnected practice exercises.",
+    "constraints": "The project keeps its focus on Java fundamentals and transparent persistence instead of adding infrastructure that would obscure the learning objective.",
+    "architecture": "A structured student model is managed through validation and menu-driven operations, with CSV file I/O providing persistence between sessions.",
+    "implementation": "The system uses classes, methods, arrays or collections as appropriate, validation paths, file operations, searches, sorting logic, and basic statistics to make program state visible and usable.",
+    "decisions": "Keeping persistence readable in CSV makes the relationship between runtime objects and stored data easy to inspect while exercising practical error handling.",
+    "challenges": "Consistency across CRUD flows and persistence requires careful validation and a clear single source of truth for each student record.",
+    "result": "A practical Java learning system that demonstrates how OOP, data handling, and persistence combine into working software.",
+    "lessons": "Small systems are a strong place to learn how data models and boundaries affect every feature built on top of them.",
+    "flow": [["Input", "Student details and operations"], ["Validation", "Check required fields and rules"], ["Model", "Student objects and methods"], ["Operations", "CRUD, search, sorting, statistics"], ["Persistence", "CSV storage and retrieval"]]
+  }
+]

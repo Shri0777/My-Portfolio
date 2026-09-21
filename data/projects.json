@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "universal-log-framework",
+    "title": "Universal Log Pre-processing Framework",
+    "label": "Featured / SIH26156",
+    "summary": "A cloud and DevOps-oriented system design for taking heterogeneous security and application logs through a traceable, vendor-agnostic preparation pipeline.",
+    "technologies": ["Python", "REST APIs", "Docker", "Cloud", "Monitoring"],
+    "featured": true,
+    "caseStudy": "universal-log-framework"
+  },
+  {
+    "id": "student-tracker",
+    "title": "Student Management System",
+    "label": "Java / Software foundations",
+    "summary": "A Java application used to apply object-oriented programming, validation, CSV persistence, CRUD workflows, searching, sorting, and student-level statistics in one coherent system.",
+    "technologies": ["Java", "OOP", "File I/O", "CSV", "Data Structures"],
+    "featured": false,
+    "caseStudy": "student-tracker"
+  }
+]

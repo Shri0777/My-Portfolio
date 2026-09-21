@@ -1,334 +1,125 @@
-/* =========================================
-   Main JS — Navigation, Scroll, Animations
-   ========================================= */
+(() => {
+  "use strict";
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initMobileNav();
-  initSmoothScroll();
-  initFadeAnimations();
-  initContactForm();
-});
+  function setupNavigation() {
+    const header = document.querySelector("[data-header]");
+    const toggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector("#mobile-menu");
+    const navLinks = [...document.querySelectorAll(".desktop-nav a")];
+    const closeMenu = () => {
+      menu.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation menu");
+      document.body.classList.remove("menu-open");
+    };
+    toggle?.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) { closeMenu(); return; }
+      menu.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close navigation menu");
+      document.body.classList.add("menu-open");
+      menu.querySelector("a")?.focus();
+    });
+    menu?.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+    document.addEventListener("keydown", event => { if (event.key === "Escape" && !menu.hidden) { closeMenu(); toggle.focus(); } });
+    window.addEventListener("scroll", () => header?.classList.toggle("scrolled", window.scrollY > 16), { passive: true });
 
-
-/* ---- Navbar scroll effect ---- */
-function initNavbar() {
-  const navbar = document.querySelector('.navbar');
-  const navLinks = document.querySelectorAll('.navbar__link, .mobile-nav__link');
-  const sections = document.querySelectorAll('section[id]');
-
-  if (!navbar) return;
-
-  // Scroll → translucent
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        if (window.scrollY > 20) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-        ticking = false;
+    const sectionLinks = navLinks.map(link => [link, document.querySelector(link.getAttribute("href"))]).filter(([, section]) => section);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        sectionLinks.forEach(([link, section]) => link.classList.toggle("active", section === entry.target));
       });
-      ticking = true;
-    }
-  });
-
-  // Active section highlight
-  const observerOptions = {
-    rootMargin: '-20% 0px -75% 0px',
-    threshold: 0
-  };
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          }
-        });
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach(section => sectionObserver.observe(section));
-}
-
-
-/* ---- Mobile navigation ---- */
-function initMobileNav() {
-  const hamburger = document.querySelector('.navbar__hamburger');
-  const mobileNav = document.querySelector('.mobile-nav');
-  const overlay = document.querySelector('.mobile-nav-overlay');
-  const mobileLinks = document.querySelectorAll('.mobile-nav__link');
-
-  if (!hamburger || !mobileNav || !overlay) return;
-
-  function openMenu() {
-    hamburger.classList.add('open');
-    mobileNav.classList.add('open');
-    overlay.classList.add('visible');
-    document.body.style.overflow = 'hidden';
-    hamburger.setAttribute('aria-expanded', 'true');
+    }, { rootMargin: "-25% 0px -65% 0px" });
+    sectionLinks.forEach(([, section]) => observer.observe(section));
   }
 
-  function closeMenu() {
-    hamburger.classList.remove('open');
-    mobileNav.classList.remove('open');
-    overlay.classList.remove('visible');
-    document.body.style.overflow = '';
-    hamburger.setAttribute('aria-expanded', 'false');
-  }
-
-  hamburger.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.contains('open');
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  overlay.addEventListener('click', closeMenu);
-
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
-      closeMenu();
-    }
-  });
-}
-
-
-/* ---- Smooth scrolling ---- */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const targetId = anchor.getAttribute('href');
-      if (targetId === '#') return;
-
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        const navbarHeight = 64;
-        const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-}
-
-
-/* ---- Fade-in animations ---- */
-function initFadeAnimations() {
-  const fadeElements = document.querySelectorAll('.fade-in');
-
-  if (!fadeElements.length) return;
-
-  const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        fadeObserver.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px'
-  });
-
-  fadeElements.forEach(el => fadeObserver.observe(el));
-}
-
-
-/* ---- Contact form ---- */
-function initContactForm() {
-  const form = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('submit-btn');
-  const btnText = submitBtn?.querySelector('.btn-text');
-  const successCard = document.getElementById('form-success');
-  const errorCard = document.getElementById('form-error');
-
-  if (!form || !submitBtn) return;
-
-  const nameInput = form.querySelector('#contact-name');
-  const emailInput = form.querySelector('#contact-email');
-  const subjectInput = form.querySelector('#contact-subject');
-  const messageInput = form.querySelector('#contact-message');
-  const counter = form.querySelector('#message-counter');
-  
-  const inputs = [nameInput, emailInput, subjectInput, messageInput].filter(Boolean);
-
-  // Character counter for message
-  if (messageInput && counter) {
-    messageInput.addEventListener('input', () => {
-      const len = messageInput.value.length;
-      counter.textContent = `${len} / 1000`;
+  function setupSystemMap() {
+    document.querySelector(".system-canvas")?.setAttribute("role", "region");
+    const notes = {
+      code: "Start with clear program logic, then make it dependable in the environment where it runs.",
+      api: "Define useful boundaries so applications and people can depend on the service contract.",
+      package: "Package the application with its runtime needs so it can be reproduced consistently.",
+      cloud: "Plan for the environment where a service is deployed, configured, and allowed to grow.",
+      observe: "Logs and signals turn a running service into a system that can be understood and improved."
+    };
+    const note = document.querySelector(".pipeline-note");
+    document.querySelectorAll("[data-system-map] .pipeline-node").forEach(node => {
+      node.addEventListener("click", () => {
+        document.querySelectorAll("[data-system-map] .pipeline-node").forEach(item => { item.classList.remove("active"); item.setAttribute("aria-pressed", "false"); });
+        node.classList.add("active"); node.setAttribute("aria-pressed", "true");
+        note.textContent = notes[node.dataset.stage];
+      });
     });
   }
 
-  // Real-time validation
-  inputs.forEach(input => {
-    input.addEventListener('input', () => {
-      validateInput(input);
-      checkFormValidity();
-    });
-    input.addEventListener('blur', () => {
-      validateInput(input);
-      checkFormValidity();
-    });
-  });
-
-  function showError(input, msg) {
-    input.classList.add('invalid');
-    const errorEl = document.getElementById(`${input.id.replace('contact-', '')}-error`);
-    if (errorEl) errorEl.textContent = msg;
+  function setupReveals() {
+    const show = scope => scope.querySelectorAll("[data-reveal]").forEach(element => element.classList.add("revealed"));
+    if (reducedMotion) { show(document); return; }
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("revealed"); observer.unobserve(entry.target); } }), { threshold: .1, rootMargin: "0px 0px -35px" });
+    document.querySelectorAll("[data-reveal]").forEach(element => observer.observe(element));
+    window.addEventListener("portfolio:rendered", () => document.querySelectorAll("[data-reveal]").forEach(element => observer.observe(element)), { once: true });
   }
 
-  function clearError(input) {
-    input.classList.remove('invalid');
-    const errorEl = document.getElementById(`${input.id.replace('contact-', '')}-error`);
-    if (errorEl) errorEl.textContent = '';
-  }
-
-  function validateInput(input) {
-    const val = input.value.trim();
-    if (!val && input.required) {
-      showError(input, 'This field is required');
-      return false;
-    }
-    
-    if (input.type === 'email' && val) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(val)) {
-        showError(input, 'Please enter a valid email address');
-        return false;
-      }
-    }
-    
-    if (input.tagName.toLowerCase() === 'textarea' && val) {
-      if (val.length < 10) {
-        showError(input, 'Message must be at least 10 characters long');
-        return false;
-      }
-      if (val.length > 1000) {
-        showError(input, 'Message cannot exceed 1000 characters');
-        return false;
-      }
-    }
-
-    clearError(input);
-    return true;
-  }
-
-  function checkFormValidity() {
-    const isValid = inputs.every(input => {
-      const val = input.value.trim();
-      if (!val && input.required) return false;
-      if (input.type === 'email' && val) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-      }
-      if (input.tagName.toLowerCase() === 'textarea' && val) {
-        return val.length >= 10 && val.length <= 1000;
-      }
-      return true;
-    });
-    
-    submitBtn.disabled = !isValid;
-  }
-
-  // Initial check
-  checkFormValidity();
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Check honeypot
-    const honeypot = form.querySelector('input[name="_gotcha"]');
-    if (honeypot && honeypot.value) {
-      return; // Silently fail for bots
-    }
-
-    // Final validation check
-    let isFormValid = true;
-    inputs.forEach(input => {
-      if (!validateInput(input)) {
-        isFormValid = false;
+  function setupContactForm() {
+    const form = document.querySelector("#contact-form");
+    const status = document.querySelector("#form-status");
+    const button = document.querySelector("#contact-submit");
+    if (!form || !status || !button) return;
+    const fields = [
+      ["contact-name", "Please enter your name."],
+      ["contact-email", "Please enter a valid email address."],
+      ["contact-message", "Please include a short message (at least 10 characters)."]
+    ];
+    const validate = () => {
+      let valid = true;
+      fields.forEach(([id, message]) => {
+        const input = document.getElementById(id);
+        const error = document.getElementById(`${id}-error`);
+        const invalid = !input.value.trim() || (id === "contact-email" && !input.validity.valid) || (id === "contact-message" && input.value.trim().length < 10);
+        input.setAttribute("aria-invalid", String(invalid));
+        error.textContent = invalid ? message : "";
+        if (invalid) valid = false;
+      });
+      return valid;
+    };
+    fields.forEach(([id]) => document.getElementById(id)?.addEventListener("blur", validate));
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      status.textContent = "";
+      if (!validate()) { status.textContent = "Please check the highlighted fields."; return; }
+      if (document.getElementById("website").value) { status.textContent = "Thanks. Your message has been received."; form.reset(); return; }
+      button.disabled = true; button.querySelector("span").textContent = "Sending…";
+      try {
+        const endpoint = window.APP_CONFIG?.formspreeEndpoint || form.action;
+        const response = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        if (!response.ok) throw new Error("Submission failed");
+        form.reset(); status.textContent = "Message sent. I’ll get back to you as soon as I can.";
+      } catch (error) {
+        status.textContent = "The message could not be sent right now. Please email me directly instead.";
+      } finally {
+        button.disabled = false; button.querySelector("span").textContent = "Send message";
       }
     });
+  }
 
-    if (!isFormValid) return;
-
-    // Loading state
-    submitBtn.disabled = true;
-    submitBtn.classList.add('loading');
-    if (btnText) btnText.textContent = 'Sending...';
-    successCard.hidden = true;
-    errorCard.hidden = true;
-
-    // Disable inputs
-    const allInputs = form.querySelectorAll('input, textarea');
-    allInputs.forEach(el => el.disabled = true);
-
-    const formData = new FormData(form);
-    
-    // Load Formspree endpoint from config
-    const endpoint = window.APP_CONFIG?.formspreeEndpoint || "https://formspree.io/f/YOUR_FORM_ID";
-
+  async function loadGitHub() {
+    const panel = document.querySelector("#github-panel");
+    if (!panel) return;
     try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+      const response = await fetch("https://api.github.com/users/Shri0777/repos?sort=updated&per_page=3", { headers: { Accept: "application/vnd.github+json" } });
+      if (!response.ok) throw new Error("GitHub unavailable");
+      const repositories = await response.json();
+      if (!repositories.length) return;
+      const list = repositories.map(repo => `<a class="github-repo" href="${repo.html_url}" target="_blank" rel="noopener noreferrer"><strong>${repo.name}</strong><span>${repo.language || "Repository"}${repo.stargazers_count ? ` · ${repo.stargazers_count} stars` : ""}</span></a>`).join("");
+      panel.innerHTML = `<p class="github-kicker">RECENTLY UPDATED / GITHUB</p><div class="github-repos">${list}</div><a class="github-panel-link" href="https://github.com/Shri0777" target="_blank" rel="noopener noreferrer">Open GitHub profile <span aria-hidden="true">↗</span></a>`;
+    } catch (_) { /* The static fallback is intentionally retained. */ }
+  }
 
-      if (response.ok) {
-        // Success
-        successCard.hidden = false;
-        form.reset();
-        if (counter) counter.textContent = '0 / 1000';
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          successCard.hidden = true;
-        }, 5000);
-      } else {
-        // Error
-        const data = await response.json().catch(() => null);
-        let errorMsg = 'Please try again in a few minutes.';
-        if (data && data.errors && data.errors.length > 0) {
-          errorMsg = data.errors.map(e => e.message).join(', ');
-        } else if (data && data.error) {
-          errorMsg = data.error;
-        }
-        const errorDesc = errorCard.querySelector('p');
-        if (errorDesc) errorDesc.textContent = errorMsg;
-        errorCard.hidden = false;
-      }
-    } catch (err) {
-      // Error
-      const errorDesc = errorCard.querySelector('p');
-      if (errorDesc) errorDesc.textContent = 'Network error. Please check your connection or CORS settings.';
-      errorCard.hidden = false;
-    } finally {
-      // Reset loading state
-      submitBtn.classList.remove('loading');
-      if (btnText) btnText.textContent = 'Send Message';
-      
-      // Re-enable inputs
-      allInputs.forEach(el => el.disabled = false);
-      
-      // Re-check validity to update button state
-      checkFormValidity();
-    }
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector("#year").textContent = new Date().getFullYear();
+    setupNavigation(); setupSystemMap(); setupReveals(); setupContactForm(); loadGitHub();
   });
-}
+})();

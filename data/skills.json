@@ -1,0 +1,6 @@
+[
+  {"group":"Languages","items":["Java","Python","SQL"]},
+  {"group":"Backend","items":["FastAPI","REST APIs","PostgreSQL","SQLite"]},
+  {"group":"Cloud & DevOps","items":["AWS","Docker","Linux","Git","GitHub"]},
+  {"group":"Frontend & Automation","items":["React","JavaScript","HTML / CSS","n8n","AI APIs"]}
+]

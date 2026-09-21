@@ -1,0 +1,8 @@
+[
+  {"title":"Engineering student","description":"B.Tech CSBS at KGISL Institute of Technology."},
+  {"title":"Software foundations","description":"Java, Python, SQL, data structures, and OOP."},
+  {"title":"Backend thinking","description":"APIs, persistence, validation, and service boundaries."},
+  {"title":"Systems practice","description":"Larger project architecture and traceable data flows."},
+  {"title":"Cloud / DevOps","description":"Linux, Docker, AWS, observability, and delivery paths."},
+  {"title":"Practical work","description":"Client-oriented development and continuous iteration."}
+]

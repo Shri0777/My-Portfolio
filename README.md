@@ -1,158 +1,167 @@
-# Personal Portfolio — Shri Menakshi Sundaram V
+# Shri Menakshi Sundaram V - Portfolio
 
-A minimal, premium personal portfolio website built with vanilla HTML, CSS, and JavaScript.
+A fast, static personal career website for Shri Menakshi Sundaram V, a software engineering student focused on backend development, cloud foundations, DevOps, systems, APIs, and practical software delivery.
 
-## Quick Start
+The site is intentionally not a generic developer template. Its core story is "from code to cloud": clear application logic, service boundaries, repeatable packaging, deployment thinking, and observability.
 
-Open `index.html` in a browser, or serve it with any static file server:
+## Highlights
+
+- Recruiter-oriented hero with an interactive engineering delivery path
+- Focused technical stack, grouped by engineering role instead of skill percentages
+- Data-driven selected projects and detailed case-study dialog
+- Featured Universal Log Pre-processing Framework architecture visualization
+- Cloud / DevOps workflow and technical trajectory sections
+- Optional GitHub API enhancement with a static fallback
+- Formspree contact form with validation, loading and failure states, plus a honeypot field
+- Responsive navigation, visible keyboard focus, semantic landmarks, and reduced-motion support
+- SEO metadata, Open Graph metadata, and Person JSON-LD
+- No build step and no framework dependency
+
+## Run Locally
+
+The site uses `fetch()` to load JSON content, so serve it through a local web server rather than opening `index.html` directly.
 
 ```bash
-# Using Python
-python -m http.server 8000
-
-# Using Node.js
-npx serve .
+python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-> **Note:** The site must be served via a web server (not `file://`) for the JSON data loading to work.
+Open http://127.0.0.1:4173.
 
----
-
-## Adding Content
-
-All content is managed through JSON files in the `data/` directory. Edit the JSON, refresh the page, and your changes appear immediately.
-
-### Add a New Project
-
-Edit `data/projects.json` and add an object:
-
-```json
-{
-  "title": "Project Name",
-  "description": "A short description of the project.",
-  "thumbnail": "assets/images/project-name.webp",
-  "technologies": ["Python", "FastAPI", "Docker"],
-  "github": "https://github.com/Shri0777/project-name",
-  "demo": "https://project-demo.com",
-  "caseStudy": "case-study-id",
-  "featured": true
-}
-```
-
-- Set `featured: true` to display on the homepage
-- Leave `thumbnail`, `demo`, or `caseStudy` as empty strings `""` if not applicable
-- `caseStudy` should match the `id` field of a case study in `case-studies.json`
-
-### Add a New Case Study
-
-Edit `data/case-studies.json` and add an object:
-
-```json
-{
-  "id": "unique-case-study-id",
-  "title": "Case Study Title",
-  "category": "Backend Development",
-  "summary": "A brief overview that appears on the card.",
-  "problem": "Description of the problem...",
-  "research": "What research was done...",
-  "planning": "How the project was planned...",
-  "architecture": "Technical architecture details...",
-  "implementation": "How it was built...",
-  "challenges": "What challenges arose...",
-  "solution": "How challenges were solved...",
-  "results": "Measurable outcomes...",
-  "lessonsLearned": "Key takeaways..."
-}
-```
-
-### Add a New Article
-
-Edit `data/articles.json` and add an object:
-
-```json
-{
-  "title": "Article Title",
-  "summary": "A short summary for the card.",
-  "category": "Backend Development",
-  "date": "2026-07-01",
-  "readingTime": "5 min",
-  "url": "https://link-to-article.com"
-}
-```
-
-### Add/Edit Services
-
-Edit `data/services.json`. Available icons: `server`, `layers`, `zap`, `code`, `layout`, `brain`.
-
-### Add/Edit Testimonials
-
-Edit `data/testimonials.json`:
-
-```json
-{
-  "quote": "Client review text...",
-  "name": "Client Name",
-  "company": "Company Name",
-  "photo": "assets/images/client-photo.webp"
-}
-```
-
-- Leave `photo` as `""` to show the client's initial instead
-
----
+Any static host works for deployment, including GitHub Pages, Netlify, Vercel static hosting, or an S3-compatible bucket.
 
 ## Project Structure
 
-```
-MY_PORTFOLIO/
-├── index.html           # Single-page site
+```text
+My-Portfolio/
+├── index.html                 # Page structure, identity copy, metadata, SEO
 ├── css/
-│   ├── reset.css        # CSS reset
-│   ├── variables.css    # Design tokens
-│   └── styles.css       # Component styles
+│   ├── reset.css              # Small reset and baseline focus treatment
+│   ├── variables.css          # Design tokens
+│   └── styles.css             # Responsive visual system and components
 ├── js/
-│   ├── main.js          # Navigation, scroll, animations
-│   └── renderer.js      # Renders data from JSON files
+│   ├── config.js              # Formspree endpoint configuration
+│   ├── main.js                # Navigation, interactions, form, GitHub enhancement
+│   └── renderer.js            # Escaped data rendering and case-study dialog
 ├── data/
-│   ├── projects.json    # Project entries
-│   ├── case-studies.json# Case study entries
-│   ├── articles.json    # Article entries
-│   ├── services.json    # Service offerings
-│   └── testimonials.json# Client testimonials
-├── assets/
-│   └── images/          # Project thumbnails, photos
-└── README.md            # This file
+│   ├── projects.json          # Selected project summaries
+│   ├── case-studies.json      # Long-form engineering case studies and flows
+│   ├── skills.json            # Grouped technical stack
+│   ├── journey.json           # Technical development trajectory
+│   ├── services.json          # Structured freelance capability content
+│   ├── articles.json          # Reserved writing content model
+│   └── testimonials.json      # Reserved social-proof content model
+└── README.md
 ```
 
----
+## Content Model
 
-## Customization
+The active portfolio content is separated from presentation. Update the JSON files to revise technical skills, projects, case studies, and journey content without changing the renderer.
 
-### Colors
+### Project
 
-Edit `css/variables.css` to change the color palette:
+Add an entry to `data/projects.json`. Each project should reference an existing case study.
 
-```css
---color-accent: #2563EB;     /* Change accent color */
---color-text: #111111;       /* Change primary text */
---color-bg: #FFFFFF;         /* Change background */
+```json
+{
+  "id": "project-id",
+  "title": "Project title",
+  "label": "Category / context",
+  "summary": "A truthful engineering summary.",
+  "technologies": ["Java", "REST APIs", "Docker"],
+  "featured": false,
+  "caseStudy": "project-id"
+}
 ```
 
-### Personal Information
+### Case Study
 
-Update the following in `index.html`:
-- Hero section: name, roles, description
-- Contact section: email, GitHub, LinkedIn, location
-- Footer: copyright name
-- `<title>` and `<meta>` tags
+Add the corresponding entry in `data/case-studies.json`. The `flow` field powers both the featured architecture panel and the dialog's system flow.
 
----
+```json
+{
+  "id": "project-id",
+  "title": "Project title",
+  "category": "Engineering category",
+  "summary": "Short explanation.",
+  "problem": "The problem being addressed.",
+  "constraints": "Important technical or delivery constraints.",
+  "architecture": "How the parts fit together.",
+  "implementation": "What was built or prototyped.",
+  "decisions": "Key engineering decisions.",
+  "challenges": "Challenges encountered.",
+  "result": "Truthful outcome.",
+  "lessons": "What the work taught.",
+  "flow": [["Source", "Input data"], ["Service", "Processing boundary"]]
+}
+```
 
-## Performance
+Keep project claims evidence-based. Do not add invented employers, clients, metrics, production scale, awards, certifications, or testimonials.
 
-- No build step required
-- Minimal JavaScript (~8KB total)
-- Lazy-loaded images
-- System font stack fallback
-- Inline SVG icons (no icon library requests)
-- CSS transitions only (no animation libraries)
+### Skills and Journey
+
+`data/skills.json` contains named groups and their items:
+
+```json
+{ "group": "Backend", "items": ["FastAPI", "REST APIs", "PostgreSQL"] }
+```
+
+`data/journey.json` contains the six-step technical trajectory:
+
+```json
+{ "title": "Backend thinking", "description": "APIs, persistence, validation, and service boundaries." }
+```
+
+## Configuration
+
+### Formspree
+
+The existing endpoint is configured in `js/config.js`:
+
+```js
+window.APP_CONFIG = {
+  formspreeEndpoint: "https://formspree.io/f/mkolyozr"
+};
+```
+
+Replace it only when moving to another Formspree form. The matching form `action` is also present in `index.html` as a no-JavaScript fallback.
+
+### Production URL
+
+Before deploying, replace every `https://your-domain.example/` value in `index.html` with the real public URL. Those values are used for the canonical link and structured data.
+
+### GitHub
+
+The page links to `https://github.com/Shri0777` and makes an unauthenticated request for up to three recently updated public repositories. No token is used or required. If the API is unavailable or rate-limited, the GitHub section preserves its static profile link and remains functional.
+
+## Design and Interaction Notes
+
+- The interactive hero map lets visitors move through Code, API, Package, Cloud, and Observe stages. It is the site's one intentional technical interaction.
+- Project buttons open native HTML dialog case studies with keyboard-accessible close behavior.
+- Navigation is sticky and updates its active state by section.
+- Motion is limited to reveal and state transitions. `prefers-reduced-motion: reduce` disables nonessential movement.
+- The mobile layout is intentionally single-column, with a compact menu and stable control sizes.
+
+## Accessibility
+
+- Semantic `header`, `nav`, `main`, `section`, `footer`, form labels, and heading hierarchy
+- Skip link and visible focus styles
+- Native dialog with an accessible label and close control
+- Accessible live regions for the engineering map, data load areas, and form feedback
+- Form fields expose invalid state and adjacent error messages
+- Reduced-motion support
+
+## Verification
+
+Run the following basic checks after edits:
+
+```bash
+node --check js/main.js
+node --check js/renderer.js
+node -e "for (const f of require('fs').readdirSync('data')) JSON.parse(require('fs').readFileSync('data/' + f)); console.log('All data JSON is valid')"
+```
+
+Then serve the site locally and verify desktop and mobile views, the mobile menu, interactive system map, project dialogs, GitHub fallback behavior, and contact form feedback.
+
+## License
+
+This portfolio is personal to Shri Menakshi Sundaram V. Reuse the implementation only with appropriate attribution and replacement of personal content.
